@@ -19,7 +19,9 @@ def cargar_datos(ruta):
     ]
 
     # Convertir fechas
-    df["fecha_nacimiento"] = pd.to_datetime(df["fecha_nacimiento"], errors='coerce')
+    df["fecha_nacimiento"] = pd.to_datetime(
+        df["fecha_nacimiento"], errors="coerce", dayfirst=True
+    )
 
     return df
 
