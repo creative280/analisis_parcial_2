@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Guía Bootstrap · Parcial 3 IA</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --doc-max: 44rem;
+        --doc-muted: #5c6370;
+        --doc-surface: rgba(255, 255, 255, 0.82);
+      }
+      body {
+        font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(180deg, #f0f4ff 0%, #f8fafc 28%, #ffffff 100%);
+        color: #1e293b;
+      }
+      .doc-navbar {
+        backdrop-filter: blur(10px);
+        background: rgba(13, 110, 253, 0.92) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .doc-hero {
+        border-radius: 1rem;
+        border: 1px solid rgba(13, 110, 253, 0.15);
+        box-shadow: 0 0.5rem 2rem rgba(13, 110, 253, 0.12);
+        background: linear-gradient(135deg, #0d6efd 0%, #4f46e5 100%);
+      }
+      .doc-toc .list-group-item {
+        border: none;
+        padding-left: 0.75rem;
+        border-radius: 0.5rem !important;
+        margin-bottom: 0.2rem;
+      }
+      .doc-toc .list-group-item-action:hover {
+        background: rgba(13, 110, 253, 0.08);
+      }
+      .doc-section {
+        scroll-margin-top: 5.5rem;
+      }
+      .doc-prose p {
+        line-height: 1.7;
+        color: #334155;
+      }
+      .doc-prose h2 {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .doc-prose h3 {
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .doc-code {
+        font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+        font-size: 0.85rem;
+        background: #0f172a;
+        color: #e2e8f0;
+        border-radius: 0.65rem;
+        padding: 1rem 1.15rem;
+        overflow-x: auto;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      }
+      .doc-kicker {
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        color: var(--doc-muted);
+        font-weight: 600;
+      }
+      .sticky-toc {
+        position: sticky;
+        top: 5.5rem;
+      }
+      .table-wrap {
+        border-radius: 0.65rem;
+        overflow: hidden;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+      }
+    </style>
+  </head>
+  <body>
+    <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 btn btn-sm btn-light" href="#contenido-principal">Saltar al contenido</a>
+
+    <nav class="navbar navbar-expand-lg navbar-dark doc-navbar sticky-top shadow-sm">
+      <div class="container">
+        <span class="navbar-brand fw-semibold">Docs · Bootstrap 5.3</span>
+        <div class="ms-auto d-flex flex-wrap gap-2 align-items-center">
+          <a class="btn btn-sm btn-outline-light" href="index.html">Índice docs</a>
+          <a class="btn btn-sm btn-outline-light" href="guia-estudiantes-parcial3.html">Guía Flask / proyecto</a>
+          <a class="btn btn-sm btn-light text-primary" href="GUIA_BOOTSTRAP_FUNCIONAMIENTO_Y_EJEMPLOS.md">Versión Markdown</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="container py-4 py-lg-5">
+      <div class="doc-hero text-white p-4 p-lg-5">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <p class="doc-kicker text-white-50 mb-2">flask_parcial_3 · Plantilla dashboard.html</p>
+            <h1 class="display-6 fw-bold mb-3">Cómo funciona Bootstrap</h1>
+            <p class="lead mb-0 opacity-90">
+              Guía práctica con ejemplos mínimos y referencias aplicadas al dashboard del Parcial 3.
+              Incluye grid, utilidades, navbar, cards y checklist para exponer.
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <div class="p-3 rounded-3" style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.18)">
+              <div class="small text-white-50 mb-1">Referencias oficiales</div>
+              <ul class="list-unstyled small mb-0">
+                <li class="mb-1"><a class="text-white" href="https://getbootstrap.com/docs/5.3/layout/grid/">Layout &amp; Grid</a></li>
+                <li class="mb-1"><a class="text-white" href="https://getbootstrap.com/docs/5.3/components/navbar/">Navbar</a></li>
+                <li class="mb-1"><a class="text-white" href="https://getbootstrap.com/docs/5.3/components/card/">Cards</a></li>
+                <li><a class="text-white" href="https://getbootstrap.com/docs/5.3/utilities/spacing/">Spacing</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container pb-5" id="contenido-principal">
+      <div class="row g-4 g-lg-5">
+        <aside class="col-lg-4 col-xl-3">
+          <div class="sticky-toc">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body">
+                <h2 class="h6 text-uppercase text-muted mb-3">En esta página</h2>
+                <div class="list-group doc-toc small" id="toc-nav">
+                  <a class="list-group-item list-group-item-action" href="#s1">1. Qué es Bootstrap</a>
+                  <a class="list-group-item list-group-item-action" href="#s2">2. Meta viewport</a>
+                  <a class="list-group-item list-group-item-action" href="#s3">3. Contenedores</a>
+                  <a class="list-group-item list-group-item-action" href="#s4">4. Grid</a>
+                  <a class="list-group-item list-group-item-action" href="#s5">5. Navbar</a>
+                  <a class="list-group-item list-group-item-action" href="#s6">6. Cards</a>
+                  <a class="list-group-item list-group-item-action" href="#s7">7. Espaciado m-/p-</a>
+                  <a class="list-group-item list-group-item-action" href="#s8">8. Tipografía</a>
+                  <a class="list-group-item list-group-item-action" href="#s9">9. Bordes y sombras</a>
+                  <a class="list-group-item list-group-item-action" href="#s10">10. JS bundle</a>
+                  <a class="list-group-item list-group-item-action" href="#s11">11. Tu CSS propio</a>
+                  <a class="list-group-item list-group-item-action" href="#s12">12. Checklist exposición</a>
+                </div>
+              </div>
+            </div>
+            <p class="small text-muted mt-3 mb-0">
+              Consejo UX: en pantalla ancha el índice queda fijo; en móvil bajá con los enlaces o usa la barra de dirección con <kbd>#s4</kbd>.
+            </p>
+          </div>
+        </aside>
+
+        <article class="col-lg-8 col-xl-9 doc-prose">
+          <section class="doc-section mb-5" id="s1">
+            <h2 class="h3 mb-3">1. ¿Qué es Bootstrap y qué hace en tu página?</h2>
+            <p>
+              Bootstrap es un <strong>framework de CSS</strong> (y un poco de JavaScript) que define <strong>clases</strong> con nombres fijos.
+              Al usarlas en el HTML, el navegador aplica estilos predefinidos (márgenes, colores, rejilla, tipografía) sin escribir todo el CSS a mano.
+            </p>
+            <ol class="mb-4">
+              <li>En el <code>&lt;head&gt;</code> enlazás el CSS por <strong>CDN</strong>.</li>
+              <li>En el <code>&lt;body&gt;</code> usás clases como <code>container</code>, <code>row</code>, <code>col-md-3</code>, <code>navbar</code>, <code>card</code>.</li>
+              <li>Bootstrap aplica estilos coherentes y <strong>responsive</strong> (se adaptan al ancho de pantalla).</li>
+            </ol>
+
+            <div class="mb-3"><span class="badge text-bg-primary rounded-pill">Ejemplo mínimo</span></div>
+            <pre class="doc-code mb-4"><code>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" /&gt;
+&lt;div class="container"&gt;
+  &lt;p class="text-primary fw-bold"&gt;Hola Bootstrap&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+            <div class="alert alert-primary border-0 shadow-sm mb-0" role="status">
+              <strong>Aplicado en tu proyecto:</strong> en <code>templates/dashboard.html</code>, el <code>&lt;link&gt;</code> a Bootstrap desde <code>cdn.jsdelivr.net</code> habilita casi todas las clases del dashboard. Sin él, la UI pierde forma.
+            </div>
+          </section>
+
+          <section class="doc-section mb-5" id="s2">
+            <h2 class="h3 mb-3">2. Meta <code>viewport</code> y móviles</h2>
+            <p>Bootstrap asume que la página declara el ancho correcto en celulares:</p>
+            <pre class="doc-code mb-3"><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</code></pre>
+            <p class="mb-0">
+              Indica al navegador usar el ancho real del dispositivo. Así las columnas <code>col-*</code> pueden apilarse bien.
+              En tu <code>dashboard.html</code> va justo después de <code>charset</code>. Quitarlo puede provocar vista “miniaturizada” o zoom extraño.
+            </p>
+          </section>
+
+          <section class="doc-section mb-5" id="s3">
+            <h2 class="h3 mb-3">3. Contenedores: <code>container</code> vs <code>container-fluid</code></h2>
+            <div class="table-wrap mb-3">
+              <table class="table table-striped table-hover mb-0">
+                <thead class="table-light">
+                  <tr><th scope="col">Clase</th><th scope="col">Comportamiento típico</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>container</code></td>
+                    <td>Centra el contenido y deja márgenes laterales; no estira líneas de texto infinito en monitores anchos.</td>
+                  </tr>
+                  <tr>
+                    <td><code>container-fluid</code></td>
+                    <td>Ocupa casi todo el ancho útil (útil en dashboards “full bleed”).</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <pre class="doc-code mb-3"><code>&lt;div class="container"&gt;
+  &lt;p&gt;Contenido centrado con márgenes automáticos.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            <p>
+              <strong>Aplicado:</strong> el <code>&lt;nav&gt;</code> lleva un <code>div.container</code> para que el título no choque con los bordes.
+              El <code>&lt;main class="container pb-5"&gt;</code> mantiene ancho legible; <code>pb-5</code> es padding inferior grande (ver sección 7).
+            </p>
+          </section>
+
+          <section class="doc-section mb-5" id="s4">
+            <h2 class="h3 mb-3">4. Sistema de rejilla (Grid)</h2>
+            <p>Bootstrap divide el ancho en <strong>12 columnas virtuales</strong>. Los hijos son <code>col-*</code> dentro de un <code>row</code>.</p>
+            <ul>
+              <li><code>col-6</code> ≈ mitad (6/12).</li>
+              <li><code>col-12</code> ≈ ancho completo.</li>
+              <li><code>col-6 col-md-3</code>: desde <code>md</code> (≥768px), cada hijo ocupa 3/12; en pantallas más chicas rige <code>col-6</code>.</li>
+            </ul>
+            <div class="table-wrap mb-3">
+              <table class="table table-sm table-bordered mb-0">
+                <thead class="table-light"><tr><th>Prefijo</th><th>Ancho mínimo aprox.</th></tr></thead>
+                <tbody class="small">
+                  <tr><td>(base <code>col-*</code>)</td><td>Extra small</td></tr>
+                  <tr><td><code>sm</code></td><td>≥576px</td></tr>
+                  <tr><td><code>md</code></td><td>≥768px</td></tr>
+                  <tr><td><code>lg</code></td><td>≥992px</td></tr>
+                  <tr><td><code>xl</code></td><td>≥1200px</td></tr>
+                  <tr><td><code>xxl</code></td><td>≥1400px</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <pre class="doc-code mb-3"><code>&lt;div class="row"&gt;
+  &lt;div class="col-12 col-lg-6"&gt;Izquierda&lt;/div&gt;
+  &lt;div class="col-12 col-lg-6"&gt;Derecha&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-header bg-white fw-semibold">KPI en tu dashboard</div>
+                  <div class="card-body small">
+                    <pre class="doc-code mb-0"><code>&lt;div class="row g-3 mb-4"&gt;
+  &lt;div class="col-6 col-md-3"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    <p class="mb-0 mt-2 text-muted">Móvil: 2 tarjetas por fila. Desde <code>md</code>: 4 por fila.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-header bg-white fw-semibold">Gráficas</div>
+                  <div class="card-body small">
+                    <pre class="doc-code mb-0"><code>&lt;div class="row g-4 mb-4"&gt;
+  &lt;div class="col-lg-6"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    <p class="mb-0 mt-2 text-muted"><code>g-4</code> aumenta el hueco entre columnas (gutter).</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="doc-section mb-5" id="s5">
+            <h2 class="h3 mb-3">5. Navbar</h2>
+            <pre class="doc-code mb-3"><code>&lt;nav class="navbar navbar-dark bg-primary"&gt;
+  &lt;div class="container"&gt;
+    &lt;span class="navbar-brand"&gt;Mi app&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+            <div class="table-wrap mb-3">
+              <table class="table table-striped table-sm mb-0">
+                <thead class="table-light"><tr><th>Clase</th><th>Rol</th></tr></thead>
+                <tbody class="small">
+                  <tr><td><code>navbar</code></td><td>Estilos base de barra.</td></tr>
+                  <tr><td><code>navbar-expand-lg</code></td><td>En ≥<code>lg</code>, ítems en línea; en móvil prepara colapso (con botón).</td></tr>
+                  <tr><td><code>navbar-dark</code></td><td>Texto claro sobre fondo oscuro.</td></tr>
+                  <tr><td><code>bg-primary</code></td><td>Color primario del tema (~#0d6efd).</td></tr>
+                  <tr><td><code>shadow-sm</code></td><td>Sombra suave.</td></tr>
+                  <tr><td><code>navbar-brand</code></td><td>Estilo de marca / título.</td></tr>
+                  <tr><td><code>ms-lg-auto</code></td><td>Empuja contenido a la derecha desde <code>lg</code>.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="mb-0">
+              <strong>Aplicado:</strong> <code>&lt;nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 shadow-sm"&gt;</code> en <code>dashboard.html</code>.
+            </p>
+          </section>
+
+          <section class="doc-section mb-5" id="s6">
+            <h2 class="h3 mb-3">6. Cards (tarjetas)</h2>
+            <p>Agrupan borde, padding y opcionalmente cabecera y cuerpo.</p>
+            <pre class="doc-code mb-3"><code>&lt;div class="card"&gt;
+  &lt;div class="card-header"&gt;Título arriba&lt;/div&gt;
+  &lt;div class="card-body"&gt;Contenido&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            <ul>
+              <li><code>h-100</code>: igual altura entre tarjetas en la misma fila.</li>
+              <li><strong>Hero del dashboard:</strong> <code>card ... text-white bg-primary bg-gradient</code>; la clase <code>hero</code> es CSS propio para radios/sombra.</li>
+              <li><strong>KPI:</strong> <code>card metric</code>.</li>
+              <li><strong>Gráficas:</strong> <code>card chart-card h-100</code> + <code>card-header</code> + <code>card-body text-center</code>.</li>
+            </ul>
+          </section>
+
+          <section class="doc-section mb-5" id="s7">
+            <h2 class="h3 mb-3">7. Utilidades de espaciado</h2>
+            <p>Escala habitual 0–5. <code>m</code> = margin, <code>p</code> = padding; sufijos <code>t b s e x y</code>.</p>
+            <ul>
+              <li><code>mb-2</code> / <code>mb-4</code>: separar bloques verticalmente.</li>
+              <li><code>py-4</code>: padding vertical dentro del hero.</li>
+              <li><code>pb-5</code> en <code>&lt;main&gt;</code>: aire antes del pie.</li>
+            </ul>
+            <p class="text-muted small mb-0">Prueba cambiar <code>g-3</code> a <code>g-2</code> en KPI y recargar: verás el layout “respirar” sin tocar CSS custom.</p>
+          </section>
+
+          <section class="doc-section mb-5" id="s8">
+            <h2 class="h3 mb-3">8. Tipografía y color</h2>
+            <div class="table-wrap mb-3">
+              <table class="table table-sm mb-0">
+                <thead class="table-light"><tr><th>Clase</th><th>Efecto</th></tr></thead>
+                <tbody class="small">
+                  <tr><td><code>h3</code> en <code>&lt;h1&gt;</code></td><td>Semántica principal, tamaño visual de subencabezado.</td></tr>
+                  <tr><td><code>text-muted</code> <code>small</code></td><td>Etiquetas de KPI.</td></tr>
+                  <tr><td><code>fs-4</code> <code>fw-semibold</code></td><td>Número grande en tarjetas métricas.</td></tr>
+                  <tr><td><code>lead</code> <code>text-secondary</code></td><td>Bloque de conclusión legible.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section mb-5" id="s9">
+            <h2 class="h3 mb-3">9. Bordes, sombras y utilidades rápidas</h2>
+            <p><code>border-top</code> + <code>pt-3</code> en el footer separan el cierre; <code>text-center</code> centra; <code>bg-gradient</code> mejora el hero sobre <code>bg-primary</code>.</p>
+          </section>
+
+          <section class="doc-section mb-5" id="s10">
+            <h2 class="h3 mb-3">10. JavaScript <code>bootstrap.bundle.min.js</code></h2>
+            <pre class="doc-code mb-3"><code>&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code></pre>
+            <p class="mb-0">Incluye Popper para dropdowns, tooltips, etc. En el dashboard actual no es obligatorio para el layout estático, pero deja lista la base si agregan componentes interactivos.</p>
+          </section>
+
+          <section class="doc-section mb-5" id="s11">
+            <h2 class="h3 mb-3">11. Tu CSS propio en <code>&lt;style&gt;</code></h2>
+            <p>
+              Bootstrap cubre la mayor parte del esqueleto. Las clases <code>.hero</code>, <code>.chart-card</code>, <code>.metric</code> afinan radios, sombras y el gradiente de fondo para que no se vea “plantilla pelada”.
+            </p>
+          </section>
+
+          <section class="doc-section mb-5" id="s12">
+            <h2 class="h3 mb-3">12. Checklist para exponer (1 minuto)</h2>
+            <ol class="mb-4">
+              <li>Bootstrap = clases que activan CSS prearmado.</li>
+              <li>Grid: <code>container</code> → <code>row</code> → <code>col-*</code> (hasta 12).</li>
+              <li>Responsive: combinar <code>col-6 col-md-3</code> como en KPI.</li>
+              <li>Componentes: <code>navbar</code>, <code>card</code> + utilidades.</li>
+              <li>CDN rápido; CSS propio corto para marca del equipo.</li>
+            </ol>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-primary" href="guia-estudiantes-parcial3.html">Seguir: guía Flask y arquitectura</a>
+              <a class="btn btn-outline-secondary" href="#s1">Volver arriba</a>
+            </div>
+          </section>
+
+          <footer class="pt-4 mt-2 border-top text-muted small">
+            Documentación del curso · Parcial 3 · Abre este archivo con doble clic o sirve los estáticos con <code>python -m http.server</code> desde <code>docs/</code> si tu navegador bloquea fuentes locales.
+          </footer>
+        </article>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

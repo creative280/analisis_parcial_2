@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Presentación · Guía Bootstrap · Parcial 3 IA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --slide-bg: #0c1020;
+        --slide-card: rgba(255, 255, 255, 0.06);
+        --slide-accent: #6f42c1;
+        --slide-accent-2: #0d6efd;
+        --slide-text: #e8eef7;
+        --slide-muted: #94a3b8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: var(--slide-bg);
+        color: var(--slide-text);
+        font-family: "DM Sans", system-ui, sans-serif;
+        overflow: hidden;
+      }
+      #deck {
+        height: 100vh;
+        position: relative;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        padding: clamp(1.5rem, 4vw, 3.5rem);
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        background: radial-gradient(880px 520px at 90% -15%, rgba(111, 66, 193, 0.38), transparent 55%),
+          radial-gradient(760px 440px at 0% 105%, rgba(13, 110, 253, 0.22), transparent 50%),
+          var(--slide-bg);
+      }
+      .slide.active {
+        display: flex;
+        animation: fadeIn 0.45s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .slide-inner {
+        max-width: 56rem;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .kicker {
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--slide-muted);
+        font-weight: 600;
+      }
+      h1.display-title {
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+      }
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.85rem;
+      }
+      .glass {
+        background: var(--slide-card);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        backdrop-filter: blur(12px);
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .nav-overlay {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1rem 1.5rem calc(1rem + env(safe-area-inset-bottom));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        background: linear-gradient(180deg, transparent, rgba(12, 16, 32, 0.94));
+        z-index: 50;
+      }
+      .nav-overlay .btn-nav {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.5rem 1.1rem;
+        font-size: 0.9rem;
+      }
+      .nav-overlay .btn-nav:hover {
+        background: rgba(111, 66, 193, 0.4);
+        border-color: rgba(111, 66, 193, 0.55);
+      }
+      .dots {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        justify-content: center;
+        flex: 1;
+      }
+      .dots button {
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 50%;
+        border: none;
+        padding: 0;
+        background: rgba(255, 255, 255, 0.25);
+        cursor: pointer;
+      }
+      .dots button.on {
+        background: #a78bfa;
+        transform: scale(1.2);
+      }
+      .help {
+        font-size: 0.72rem;
+        color: var(--slide-muted);
+        text-align: center;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="deck" aria-live="polite">
+      <section class="slide active" data-title="Inicio">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Inteligencia artificial · Parcial 3</p>
+          <h1 class="display-title display-4 mb-3">
+            Bootstrap 5 en el dashboard<br />
+            <span style="color: #c4b5fd">Guía práctica para el curso</span>
+          </h1>
+          <p class="lead mb-4" style="color: #cbd5e1 !important; font-size: 1.1rem">
+            Cómo funciona el framework, qué clases usamos en <span class="mono text-info">dashboard.html</span> y cómo exponerlo con seguridad.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="pill"><span style="color: #a78bfa">●</span> Grid 12 columnas</span>
+            <span class="pill"><span style="color: var(--slide-accent-2)">●</span> Navbar · Cards</span>
+            <span class="pill">● Utilidades m- / p-</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Qué es">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Concepto</p>
+          <h2 class="h1 fw-bold mb-4">¿Qué es Bootstrap?</h2>
+          <ul class="fs-5 mb-0" style="line-height: 1.75; color: #cbd5e1">
+            <li class="mb-3">Framework de <strong>CSS</strong> (+ JS opcional) con <strong>clases con nombre fijo</strong>.</li>
+            <li class="mb-3">Evita escribir desde cero márgenes, colores, rejillas y tipografía.</li>
+            <li class="mb-0">Se carga por <strong>CDN</strong> en el <span class="mono">&lt;head&gt;</span>; sin ese enlace, las clases del proyecto <strong>no aplican</strong>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Viewport">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Móvil primero</p>
+          <h2 class="h1 fw-bold mb-3">Meta viewport</h2>
+          <div class="glass p-4 mb-3">
+            <div class="mono text-light">&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</div>
+          </div>
+          <p style="color: #cbd5e1" class="mb-0">
+            Indica al celular que use el <strong>ancho real</strong> del dispositivo. Así <span class="mono">col-*</span> puede apilarse bien. En <strong>dashboard.html</strong> va después de <span class="mono">charset</span>.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Contenedor">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Ancho de lectura</p>
+          <h2 class="h1 fw-bold mb-4"><span class="mono">container</span> vs <span class="mono">container-fluid</span></h2>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="glass p-4 h-100">
+                <h3 class="h5 mb-2" style="color: #c4b5fd">container</h3>
+                <p class="mb-0" style="color: #cbd5e1">Centra el contenido y limita el ancho en pantallas grandes (más legible).</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="glass p-4 h-100">
+                <h3 class="h5 mb-2 text-info">container-fluid</h3>
+                <p class="mb-0" style="color: #cbd5e1">Casi todo el ancho útil — típico en dashboards “full width”.</p>
+              </div>
+            </div>
+          </div>
+          <p class="small mt-3 mb-0" style="color: var(--slide-muted)">
+            Nosotros: <strong>navbar</strong> y <strong>main</strong> usan <span class="mono">container</span> + <span class="mono">pb-5</span> en el main.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Grid">
+        <div class="slide-inner">
+          <p class="kicker mb-2">12 columnas</p>
+          <h2 class="h1 fw-bold mb-3">Sistema de rejilla</h2>
+          <p class="mb-3" style="color: #cbd5e1">
+            Siempre: padre <span class="mono">row</span>, hijos <span class="mono">col-*</span>. Los números suman hasta <strong>12</strong> por fila.
+          </p>
+          <div class="table-responsive glass p-0 mb-3">
+            <table class="table table-dark table-sm mb-0 align-middle" style="--bs-table-bg: transparent">
+              <thead>
+                <tr class="text-secondary small">
+                  <th>Prefijo</th>
+                  <th>Ancho mínimo típico</th>
+                </tr>
+              </thead>
+              <tbody class="small">
+                <tr><td><span class="mono">sm</span></td><td>≥576px</td></tr>
+                <tr><td><span class="mono">md</span></td><td>≥768px</td></tr>
+                <tr><td><span class="mono">lg</span></td><td>≥992px</td></tr>
+                <tr><td><span class="mono">xl</span> / <span class="mono">xxl</span></td><td>≥1200px / ≥1400px</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small mb-0" style="color: var(--slide-muted)"><span class="mono">col-6 col-md-3</span>: en móvil mitad; desde md, cuarto de fila.</p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="KPI">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Aplicado · KPI</p>
+          <h2 class="h1 fw-bold mb-3">Indicadores en fila</h2>
+          <div class="glass p-4 mb-3">
+            <div class="mono text-light small">
+              &lt;div class="row g-3 mb-4"&gt;<br />
+              &nbsp;&nbsp;&lt;div class="col-6 col-md-3"&gt; … &lt;/div&gt;<br />
+              &lt;/div&gt;
+            </div>
+          </div>
+          <ul style="color: #cbd5e1" class="mb-0">
+            <li><strong>Móvil:</strong> 2 tarjetas por fila (<span class="mono">6+6</span>).</li>
+            <li><strong>Desde md:</strong> 4 tarjetas (<span class="mono">3×4</span>).</li>
+            <li><span class="mono">g-3</span> = espacio (gutter) entre columnas.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Gráficas">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Aplicado · Gráficas</p>
+          <h2 class="h1 fw-bold mb-3">Dos columnas en escritorio</h2>
+          <div class="glass p-4 mb-3">
+            <div class="mono text-light small">
+              &lt;div class="row g-4 mb-4"&gt;<br />
+              &nbsp;&nbsp;&lt;div class="col-lg-6"&gt; gráfica 1 &lt;/div&gt;<br />
+              &nbsp;&nbsp;&lt;div class="col-lg-6"&gt; gráfica 2 &lt;/div&gt;<br />
+              &lt;/div&gt;
+            </div>
+          </div>
+          <p style="color: #cbd5e1" class="mb-0">
+            Desde <span class="mono">lg</span>, <strong>dos gráficas por fila</strong>. En pantallas angostas se apilan. <span class="mono">g-4</span> deja más aire entre tarjetas que en KPI.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Navbar">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Barra superior</p>
+          <h2 class="h1 fw-bold mb-4">Navbar + clases útiles</h2>
+          <div class="row g-2 small" style="color: #cbd5e1">
+            <div class="col-md-6"><div class="glass p-3"><span class="mono">navbar</span> · <span class="mono">navbar-expand-lg</span></div></div>
+            <div class="col-md-6"><div class="glass p-3"><span class="mono">navbar-dark</span> · <span class="mono">bg-primary</span></div></div>
+            <div class="col-md-6"><div class="glass p-3"><span class="mono">mb-4</span> · <span class="mono">shadow-sm</span></div></div>
+            <div class="col-md-6"><div class="glass p-3"><span class="mono">navbar-brand</span> · <span class="mono">ms-lg-auto</span></div></div>
+          </div>
+          <p class="mt-3 mb-0 small" style="color: var(--slide-muted)"><span class="mono">bg-primary</span> en BS5 ≈ azul <span class="mono">#0d6efd</span>, igual línea visual que el panel.</p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Cards">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Tarjetas</p>
+          <h2 class="h1 fw-bold mb-4">Cards en el dashboard</h2>
+          <ul class="fs-5" style="color: #cbd5e1; line-height: 1.75">
+            <li class="mb-2"><strong>Hero:</strong> <span class="mono">card</span> + <span class="mono">bg-primary bg-gradient</span> + clase propia <span class="mono">hero</span>.</li>
+            <li class="mb-2"><strong>KPI:</strong> <span class="mono">card metric</span> + <span class="mono">card-body</span>.</li>
+            <li class="mb-0"><strong>Gráficas:</strong> <span class="mono">card chart-card h-100</span> + <span class="mono">card-header</span> — <span class="mono">h-100</span> iguala alturas en la fila.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Espaciado">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Utilidades</p>
+          <h2 class="h1 fw-bold mb-4">Márgenes y relleno: <span class="mono">m-</span> / <span class="mono">p-</span></h2>
+          <div class="glass p-4">
+            <p class="mb-2" style="color: #cbd5e1"><span class="mono">mb-2</span>, <span class="mono">mb-4</span> — separar bloques.</p>
+            <p class="mb-2" style="color: #cbd5e1"><span class="mono">py-4</span> — aire vertical en el hero.</p>
+            <p class="mb-2" style="color: #cbd5e1"><span class="mono">pb-5</span> en <span class="mono">&lt;main&gt;</span> — no pegar el pie al borde.</p>
+            <p class="mb-0 small" style="color: var(--slide-muted)">Escala típica 0–5. Cambiar un número y recargar = ver el efecto sin tocar CSS custom.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Extra">
+        <div class="slide-inner">
+          <p class="kicker mb-2">JS + CSS propio</p>
+          <h2 class="h1 fw-bold mb-4">Bundle y <span class="mono">&lt;style&gt;</span></h2>
+          <p style="color: #cbd5e1" class="mb-3">
+            <strong>bootstrap.bundle.min.js</strong> incluye Popper (dropdowns, tooltips…). En el panel actual casi todo es estático; cargarlo igual deja lista la base futura.
+          </p>
+          <p style="color: #cbd5e1" class="mb-0">
+            Tu <strong>CSS propio</strong> (<span class="mono">.hero</span>, <span class="mono">.chart-card</span>, gradiente de <span class="mono">body</span>) <strong>refina marca</strong> encima del esqueleto Bootstrap — buen argumento de UI en la exposición.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Checklist">
+        <div class="slide-inner">
+          <p class="kicker mb-2">1 minuto</p>
+          <h2 class="h1 fw-bold mb-4">Checklist para exponer</h2>
+          <ol class="fs-5" style="line-height: 1.8; color: #cbd5e1">
+            <li>Bootstrap = <strong>clases → estilos predefinidos</strong>.</li>
+            <li>Flujo layout: <span class="mono">container</span> → <span class="mono">row</span> → <span class="mono">col-*</span>.</li>
+            <li>Responsive: combinar <span class="mono">col-6</span> + <span class="mono">col-md-3</span> (KPI).</li>
+            <li>Componentes: <span class="mono">navbar</span>, <span class="mono">card</span> + utilidades.</li>
+            <li>CDN + un poco de CSS del equipo = <strong>marca propia</strong>.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Gracias">
+        <div class="slide-inner text-center">
+          <p class="kicker mb-3">Documentación</p>
+          <h2 class="display-6 fw-bold mb-3">Guía completa en <span class="mono">docs/</span></h2>
+          <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+            <a class="btn btn-lg rounded-pill px-4 text-white" style="background: linear-gradient(135deg, #6f42c1, #0d6efd)" href="guia-bootstrap.html">Guía HTML ampliada</a>
+            <a class="btn btn-outline-light btn-lg rounded-pill px-4" href="GUIA_BOOTSTRAP_FUNCIONAMIENTO_Y_EJEMPLOS.md">Versión Markdown</a>
+          </div>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill" href="index.html">← Índice docs</a>
+          <p class="small mt-4 mb-0" style="color: var(--slide-muted)">← → · Espacio · Re/Av Pág · Inicio/Fin</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="nav-overlay" role="navigation" aria-label="Navegación">
+      <button type="button" class="btn-nav" id="btnPrev">← Anterior</button>
+      <div class="dots" id="dots"></div>
+      <span class="help" id="counter">1 / 12</span>
+      <button type="button" class="btn-nav" id="btnNext">Siguiente →</button>
+    </div>
+
+    <script>
+      (function () {
+        var slides = Array.prototype.slice.call(document.querySelectorAll("#deck .slide"));
+        var idx = 0;
+        var dots = document.getElementById("dots");
+        var counter = document.getElementById("counter");
+        function renderDots() {
+          dots.innerHTML = "";
+          slides.forEach(function (_, i) {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.title = "Diapositiva " + (i + 1);
+            b.addEventListener("click", function () {
+              go(i);
+            });
+            dots.appendChild(b);
+          });
+        }
+        function update() {
+          slides.forEach(function (s, i) {
+            s.classList.toggle("active", i === idx);
+          });
+          dots.querySelectorAll("button").forEach(function (b, i) {
+            b.classList.toggle("on", i === idx);
+          });
+          counter.textContent = idx + 1 + " / " + slides.length;
+          document.title = "Bootstrap (" + (idx + 1) + "/" + slides.length + ") · Docs IA";
+        }
+        function go(n) {
+          idx = Math.max(0, Math.min(slides.length - 1, n));
+          update();
+        }
+        function next() {
+          go(idx + 1);
+        }
+        function prev() {
+          go(idx - 1);
+        }
+        document.getElementById("btnNext").addEventListener("click", next);
+        document.getElementById("btnPrev").addEventListener("click", prev);
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+            e.preventDefault();
+            next();
+          } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+            e.preventDefault();
+            prev();
+          } else if (e.key === "Home") {
+            e.preventDefault();
+            go(0);
+          } else if (e.key === "End") {
+            e.preventDefault();
+            go(slides.length - 1);
+          }
+        });
+        renderDots();
+        update();
+      })();
+    </script>
+  </body>
+</html>

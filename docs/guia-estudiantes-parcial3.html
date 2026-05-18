@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guía estudiantes · Flask, Jinja, dashboard Parcial 3</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "DM Sans", system-ui, sans-serif;
+        background: linear-gradient(180deg, #f0fdf4 0%, #f8fafc 35%, #ffffff 100%);
+        color: #1e293b;
+      }
+      .doc-navbar {
+        backdrop-filter: blur(10px);
+        background: rgba(25, 135, 84, 0.94) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .doc-hero {
+        border-radius: 1rem;
+        background: linear-gradient(135deg, #198754 0%, #0d6efd 100%);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0.5rem 2rem rgba(25, 135, 84, 0.18);
+      }
+      .doc-section {
+        scroll-margin-top: 5.5rem;
+      }
+      .doc-prose p,
+      .doc-prose li {
+        line-height: 1.75;
+        color: #334155;
+      }
+      .doc-code {
+        font-family: ui-monospace, "Cascadia Code", Menlo, Monaco, Consolas, monospace;
+        font-size: 0.84rem;
+        background: #0f172a;
+        color: #e2e8f0;
+        border-radius: 0.65rem;
+        padding: 1rem 1.15rem;
+        overflow-x: auto;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+      }
+      .diagram-card {
+        border-radius: 0.75rem;
+        border: 1px dashed rgba(13, 110, 253, 0.35);
+        background: rgba(13, 110, 253, 0.04);
+      }
+      .sticky-toc {
+        position: sticky;
+        top: 5.5rem;
+      }
+      .doc-toc .list-group-item {
+        border: none;
+        border-radius: 0.5rem !important;
+        margin-bottom: 0.15rem;
+      }
+      .doc-kicker {
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.75);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 btn btn-sm btn-light" href="#main">Saltar al contenido</a>
+
+    <nav class="navbar navbar-dark doc-navbar sticky-top shadow-sm">
+      <div class="container">
+        <span class="navbar-brand fw-semibold">Guía VIII semestre · Flask &amp; dashboard</span>
+        <div class="ms-auto d-flex flex-wrap gap-2">
+          <a class="btn btn-sm btn-outline-light" href="index.html">Índice docs</a>
+          <a class="btn btn-sm btn-outline-light" href="guia-bootstrap.html">Guía Bootstrap (UI)</a>
+          <a class="btn btn-sm btn-light text-success" href="GUIA_ESTUDIANTES_FLASK_BOOTSTRAP_PARCIAL3.md">Versión Markdown</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="container py-4 py-lg-5">
+      <div class="doc-hero text-white p-4 p-lg-5">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <p class="doc-kicker mb-2">Ingeniería de Software · Inteligencia Artificial</p>
+            <h1 class="display-6 fw-bold mb-3">Flask, Jinja2, Matplotlib y Bootstrap en el Parcial 3</h1>
+            <p class="lead mb-0 opacity-90">
+              Explicación ampliada para estudiar y exponer: arquitectura del repo, flujo cliente–servidor,
+              qué archivo hace qué, y cómo se conectan datos, gráficas y plantilla HTML.
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <div class="rounded-3 p-3" style="background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2)">
+              <div class="small text-white-50 mb-2">Flujo resumido</div>
+              <div class="small fw-semibold">Excel → Pandas → Matplotlib (Agg) → Base64 → Jinja → Navegador</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container pb-5" id="main">
+      <div class="row g-4 g-lg-5">
+        <aside class="col-lg-4 col-xl-3">
+          <div class="sticky-toc">
+            <div class="card border-0 shadow-sm mb-3">
+              <div class="card-body">
+                <h2 class="h6 text-uppercase text-muted mb-3">Índice</h2>
+                <div class="list-group doc-toc small" id="toc">
+                  <a class="list-group-item list-group-item-action" href="#intro">Problema y solución</a>
+                  <a class="list-group-item list-group-item-action" href="#p1">Parte 1 · Flask</a>
+                  <a class="list-group-item list-group-item-action" href="#p2">Parte 2 · Jinja2</a>
+                  <a class="list-group-item list-group-item-action" href="#p3">Parte 3 · Bootstrap</a>
+                  <a class="list-group-item list-group-item-action" href="#p4">Parte 4 · Código real</a>
+                  <a class="list-group-item list-group-item-action" href="#p5">Parte 5 · Oral / examen</a>
+                  <a class="list-group-item list-group-item-action" href="#p6">Parte 6 · Cómo correr</a>
+                  <a class="list-group-item list-group-item-action" href="#cierre">Cierre</a>
+                </div>
+              </div>
+            </div>
+            <div class="alert alert-light border small mb-0" role="note">
+              <strong>Tip UX:</strong> dos clic en esta carpeta <code>docs/</code> abre el HTML sin servidor; si algo de fuentes falla, usa
+              <code>python -m http.server</code> dentro de <code>docs</code>.
+            </div>
+          </div>
+        </aside>
+
+        <article class="col-lg-8 col-xl-9 doc-prose">
+          <section class="doc-section mb-5" id="intro">
+            <h2 class="h3 fw-bold mb-3">Primero: ¿qué problema resolvemos?</h2>
+            <ul>
+              <li>Una <strong>dashboard en Flask</strong> con <strong>todas las gráficas</strong> del proyecto.</li>
+              <li>Una <strong>conclusión general</strong> debajo de las visualizaciones.</li>
+              <li>Una <strong>interfaz ordenada</strong> (Bootstrap + pequeños ajustes CSS).</li>
+            </ul>
+            <p class="fw-semibold text-dark">La solución en el repositorio:</p>
+            <ol>
+              <li><strong>Python + Pandas</strong> leen el Excel y preparan datos.</li>
+              <li><strong>Matplotlib</strong> dibuja en el <strong>servidor</strong>.</li>
+              <li>Cada imagen se codifica como <code>data:image/png;base64,...</code> para el HTML (sin guardar PNG sueltos).</li>
+              <li><strong>Flask</strong> arma la respuesta.</li>
+              <li><strong>Bootstrap</strong> estructura navbar, grid, cards y tipografía.</li>
+            </ol>
+          </section>
+
+          <section class="doc-section mb-5" id="p1">
+            <h2 class="h3 fw-bold mb-3">Parte 1 — ¿Qué es Flask?</h2>
+            <p>
+              Flask es un <strong>microframework web</strong> para Python: hace de servidor HTTP (en clase, puerto
+              típico <strong>5000</strong>), recibe la petición y devuelve HTML, JSON u otros contenidos.
+            </p>
+            <p>
+              Orden habitual de diseño: <em>URL → función Python → plantilla HTML</em>. En este repo, la carpeta
+              <code>src/</code> concentra lógica de datos; <code>templates/</code> la presentación.
+            </p>
+
+            <div class="diagram-card p-4 mb-4">
+              <div class="small text-uppercase text-muted mb-2">Estructura (resumen)</div>
+              <pre class="doc-code mb-0"><code>flask_parcial_3/
+├── app.py                 ← rutas HTTP, render_template
+├── templates/
+│   └── dashboard.html     ← vista Jinja (huecos rellenados por el servidor)
+├── data/
+│   └── ...xlsx
+└── src/
+    ├── analysis.py        ← carga Excel + menú consola (opcional)
+    └── dashboard_service.py  ← gráficas Base64 + KPI + conclusión</code></pre>
+            </div>
+
+            <h3 class="h5 mt-4">Cliente ↔ servidor en 7 pasos</h3>
+            <ol>
+              <li>Escribís <code>http://127.0.0.1:5000/</code> en el navegador.</li>
+              <li>El navegador envía un GET a <code>/</code>.</li>
+              <li>Flask encuentra la ruta registrada con <code>@app.route("/")</code>.</li>
+              <li>Se ejecuta la función <code>dashboard()</code>.</li>
+              <li>Se arma un <strong>diccionario de contexto</strong> (stats, imágenes, conclusión).</li>
+              <li><code>render_template</code> fusiona datos + <code>dashboard.html</code>.</li>
+              <li>El navegador muestra el HTML final.</li>
+            </ol>
+
+            <h3 class="h5 mt-4">Piezas imprescindibles en <code>app.py</code></h3>
+            <ul>
+              <li><code>from flask import Flask, render_template</code></li>
+              <li><code>app = Flask(__name__)</code> — indica el “núcleo” de la app y dónde buscar <code>templates/</code>.</li>
+              <li><code>@app.route("/")</code> — el decorador “engancha” la URL con la función.</li>
+              <li><code>if __name__ == "__main__": app.run(...)</code> — solo al ejecutar el archivo directamente.</li>
+            </ul>
+
+            <pre class="doc-code mb-3"><code>@app.route("/")
+def dashboard():
+    ctx = construir_contexto_dashboard(str(DATA_PATH))
+    return render_template("dashboard.html", **ctx)</code></pre>
+
+            <p>
+              El operador <code>**ctx</code> expande el diccionario como argumentos con nombre hacia la plantilla
+              (<code>stats=...</code>, <code>conclusion=...</code>, etc.), sin listarlos uno a uno.
+            </p>
+
+            <div class="table-responsive mb-3">
+              <table class="table table-bordered table-sm bg-white">
+                <thead class="table-light"><tr><th>Fragmento</th><th>Qué hace en práctica</th></tr></thead>
+                <tbody class="small">
+                  <tr>
+                    <td><code>if __name__ == "__main__"</code></td>
+                    <td>Solo arranca el servidor si corrés <code>python app.py</code>.</td>
+                  </tr>
+                  <tr>
+                    <td><code>debug=True</code></td>
+                    <td>Mejor feedback en desarrollo; no usar así en internet público.</td>
+                  </tr>
+                  <tr>
+                    <td><code>host="127.0.0.1"</code></td>
+                    <td>Solo tu máquina; para red de laboratorio a veces se usa <code>0.0.0.0</code> con permiso.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section mb-5" id="p2">
+            <h2 class="h3 fw-bold mb-3">Parte 2 — Jinja2: <code>{{ }}</code> y <code>{% %}</code></h2>
+            <p>
+              Flask usa <strong>Jinja2</strong> para las plantillas. Las variables del servidor se insertan con dobles llaves.
+            </p>
+            <pre class="doc-code mb-3"><code>&lt;img src="{{ img_nacionalidades }}" alt="..." /&gt;</code></pre>
+            <p>
+              Ese valor ya llega como cadena completa <code>data:image/png;base64,...</code> lista para el atributo
+              <code>src</code>.
+            </p>
+            <p>Ejemplo de lógica condicional (evitar mostrar “vacío” si no hay promedio):</p>
+            <pre class="doc-code mb-3"><code>{% if stats.edad_promedio is not none %}
+  {{ stats.edad_promedio }}
+{% else %}
+  —
+{% endif %}</code></pre>
+            <p class="mb-0">No es un lenguaje nuevo: es un <strong>motor de plantillas</strong> que mantiene el HTML legible.</p>
+          </section>
+
+          <section class="doc-section mb-5" id="p3">
+            <h2 class="h3 fw-bold mb-3">Parte 3 — Bootstrap en este proyecto</h2>
+            <p>
+              Bootstrap aporta <strong>grid 12 columnas</strong>, <strong>navbar</strong>, <strong>cards</strong> y utilidades (<code>mb-4</code>,
+              <code>text-muted</code>, etc.) cargadas por CDN en <code>dashboard.html</code>.
+            </p>
+            <p>
+              El bloque <code>&lt;style&gt;</code> propio (<code>.hero</code>, <code>.chart-card</code>, <code>.metric</code>) personaliza sombras,
+              radios y fondo sin reescribir todo el layout: <strong>Bootstrap = estructura</strong>, <strong>CSS corto = identidad visual</strong> del equipo.
+            </p>
+            <div class="alert alert-info border-0 shadow-sm mb-0" role="status">
+              Profundidad visual: abrí también <a class="alert-link" href="guia-bootstrap.html">guia-bootstrap.html</a> (tablas, snippets y checklist UI).
+            </div>
+          </section>
+
+          <section class="doc-section mb-5" id="p4">
+            <h2 class="h3 fw-bold mb-3">Parte 4 — Qué hace cada módulo importante</h2>
+
+            <h3 class="h5 mt-4"><code>src/analysis.py</code> — datos compartidos</h3>
+            <p>
+              <code>cargar_datos(ruta)</code> lee el Excel, renombra columnas y convierte fechas con
+              <code>pd.to_datetime(..., errors="coerce", dayfirst=True)</code>. Eso evita caídas por fechas raras y respeta formato día/mes frecuente en Latinoamérica.
+            </p>
+            <p>
+              Las funciones con <code>plt.show()</code> sirven para el <strong>menú consola</strong>; el dashboard web usa la misma limpieza pero
+              genera PNG en memoria en <code>dashboard_service.py</code>.
+            </p>
+
+            <h3 class="h5 mt-4"><code>src/dashboard_service.py</code> — gráficas y texto</h3>
+            <ul>
+              <li><code>matplotlib.use("Agg")</code>: backend sin ventana — necesario en servidor.</li>
+              <li><code>_fig_to_base64_uri</code>: PNG → Base64 → prefijo <code>data:image/png;base64,</code>.</li>
+              <li>Cuatro funciones de gráfica + <code>estadisticas_resumen</code> + <code>texto_conclusion</code>.</li>
+            </ul>
+
+            <h3 class="h5 mt-4">KPI antes de las gráficas</h3>
+            <p>
+              Mostrar números clave arriba (“ejecutivo primero, evidencia después”): totales, rango de años, edad media,
+              año pico. Formato <code>_fmt</code> con miles separados mejore lectura en la UI.
+            </p>
+
+            <h3 class="h5 mt-4">Archivo de datos ausente</h3>
+            <pre class="doc-code mb-3"><code>if not DATA_PATH.is_file():
+    return (mensaje, 500)</code></pre>
+            <p class="mb-0">
+              Código HTTP 500 indica fallo de servidor; aquí comunica rápido que falta el Excel en <code>data/</code>.
+              Podría mejorarse con una plantilla de error “amigable” en una iteración futura.
+            </p>
+          </section>
+
+          <section class="doc-section mb-5" id="p5">
+            <h2 class="h3 fw-bold mb-3">Parte 5 — Qué memorizar para oral rápido</h2>
+            <ol>
+              <li>Flask = microframework: rutas + función + plantilla.</li>
+              <li>La plantilla no es estática: Jinja la completa en el servidor.</li>
+              <li>Bootstrap = layout rápido por clases; tu CSS corto añade marca.</li>
+              <li><strong>Agg + Base64</strong> = estadística en el servidor → imagen embebida sin archivos temporales sueltos.</li>
+              <li><code>analysis.cargar_datos</code> unifica limpieza entre consola y web.</li>
+            </ol>
+            <blockquote class="blockquote border-start border-4 border-success ps-3 py-2 mb-0" style="background: rgba(25,135,84,0.06); border-radius: 0 0.5rem 0.5rem 0;">
+              <p class="mb-2 small">
+                “Cargamos un Excel, limpiamos con pandas, reproducimos los mismos análisis que en consola,
+                convertimos cada gráfica a imagen en memoria y servimos una sola página HTML con Flask,
+                KPI y conclusión, maquetada con Bootstrap.”
+              </p>
+              <footer class="blockquote-footer small mt-0">Elevator pitch del equipo</footer>
+            </blockquote>
+          </section>
+
+          <section class="doc-section mb-5" id="p6">
+            <h2 class="h3 fw-bold mb-3">Parte 6 — Checklist para correr y depurar</h2>
+            <ol>
+              <li><code>pip install -r requirements.txt</code></li>
+              <li>Excel en <code>data/</code> con el nombre que usa <code>app.py</code>.</li>
+              <li><code>python app.py</code> desde la raíz del proyecto.</li>
+              <li>Navegador: <code>http://127.0.0.1:5000/</code></li>
+              <li>Deberías ver KPI, cuatro gráficas y conclusión.</li>
+            </ol>
+            <div class="table-responsive">
+              <table class="table table-sm table-striped">
+                <thead class="table-light"><tr><th>Síntoma</th><th>Posible causa</th></tr></thead>
+                <tbody class="small">
+                  <tr><td>Error 500 “archivo no encontrado”</td><td>Ruta o nombre del Excel incorrecto.</td></tr>
+                  <tr><td>Imagen rota o vacía</td><td>Revisar consola del servidor / error en Matplotlib o datos.</td></tr>
+                  <tr><td>Bootstrap “sin estilo”</td><td>CDN bloqueada por red institucional; prueba otra red o descarga local del CSS.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="doc-section mb-5" id="cierre">
+            <h2 class="h3 fw-bold mb-3">Cierre</h2>
+            <p>
+              Este proyecto integra datos, servidor web y presentación responsive en un alcance típico de parcial:
+              no es despliegue industrial en la nube, pero sí una base clara para explicar <strong>capas cliente–servidor</strong> y
+              <strong>separación de responsabilidades</strong> (<code>src</code> vs <code>templates</code>).
+            </p>
+            <p class="small text-muted mb-4">
+              Mejoras opcionales: segunda ruta informativa, plantilla de error 500, caché de gráficas, o charts en el cliente con Plotly
+              (más JavaScript).
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-success" href="guia-bootstrap.html">Ver guía Bootstrap (UI detallada)</a>
+              <a class="btn btn-outline-primary" href="#intro">Volver al inicio</a>
+            </div>
+          </section>
+
+          <footer class="pt-4 mt-3 border-top text-muted small">
+            Material de apoyo del curso. No sustituye la rúbrica oficial del docente.
+          </footer>
+        </article>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Documentación Parcial 3 · IA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: "DM Sans", system-ui, sans-serif;
+        min-height: 100vh;
+        background: radial-gradient(1200px 600px at 10% -10%, rgba(13, 110, 253, 0.18), transparent),
+          radial-gradient(900px 500px at 110% 20%, rgba(25, 135, 84, 0.16), transparent),
+          #f8fafc;
+      }
+      .hub-card {
+        border-radius: 1rem;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+      }
+      .hub-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2.5rem rgba(15, 23, 42, 0.12);
+      }
+      .chip {
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5 py-lg-6">
+      <div class="row justify-content-center mb-4">
+        <div class="col-lg-10 text-center">
+          <span class="chip text-primary">flask_parcial_3 · docs</span>
+          <h1 class="display-5 fw-bold mt-2 mb-3">Centro de documentación</h1>
+          <p class="lead text-secondary mb-0">
+            Guías ampliadas, presentaciones en pantalla completa (teclado) y fuentes Markdown.
+          </p>
+        </div>
+      </div>
+
+      <p class="text-center text-muted small text-uppercase fw-semibold mb-3">Presentaciones</p>
+      <div class="row g-3 mb-5 justify-content-center">
+        <div class="col-md-6 col-lg-4">
+          <a href="presentacion-clase.html" class="btn btn-dark w-100 rounded-3 py-3 shadow-sm">
+            <span class="fw-semibold d-block">Presentación · Proyecto (salón)</span>
+            <span class="small text-white-50">10 diapositivas</span>
+          </a>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <a href="presentacion-bootstrap.html" class="btn w-100 rounded-3 py-3 shadow-sm text-white" style="background: linear-gradient(135deg, #6f42c1, #0d6efd)">
+            <span class="fw-semibold d-block">Presentación · Guía Bootstrap</span>
+            <span class="small" style="opacity: 0.9">12 diapositivas</span>
+          </a>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <a href="presentacion-guia-estudiantes.html" class="btn btn-success w-100 rounded-3 py-3 shadow-sm">
+            <span class="fw-semibold d-block">Presentación · Guía estudiantes / Flask</span>
+            <span class="small text-white-50">12 diapositivas</span>
+          </a>
+        </div>
+      </div>
+
+      <p class="text-center text-muted small text-uppercase fw-semibold mb-3 mt-2">Guías detalladas</p>
+      <div class="row g-4 g-lg-5">
+        <div class="col-md-6">
+          <a href="guia-bootstrap.html" class="text-decoration-none text-dark d-block h-100">
+            <div class="card hub-card h-100 shadow-sm">
+              <div class="card-body p-4 p-lg-5 d-flex flex-column">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <span class="badge rounded-pill text-bg-primary">UI / UX</span>
+                  <span class="small text-muted">Sólo lectura</span>
+                </div>
+                <h2 class="h4 fw-bold">Guía Bootstrap</h2>
+                <p class="text-secondary flex-grow-1">
+                  Grid 12 columnas, contenedores, navbar, cards, espaciado (m-/p-), tipografía y checklist para exponer.
+                  Ejemplos mínimos + cómo aparecen en <code>dashboard.html</code>.
+                </p>
+                <span class="fw-semibold text-primary">Abrir guía →</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="guia-estudiantes-parcial3.html" class="text-decoration-none text-dark d-block h-100">
+            <div class="card hub-card h-100 shadow-sm">
+              <div class="card-body p-4 p-lg-5 d-flex flex-column">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <span class="badge rounded-pill text-bg-success">Arquitectura</span>
+                  <span class="small text-muted">VIII semestre</span>
+                </div>
+                <h2 class="h4 fw-bold">Guía para estudiantes</h2>
+                <p class="text-secondary flex-grow-1">
+                  Qué es Flask, ciclo cliente–servidor, Jinja2, Pandas/Matplotlib Agg, Base64,
+                  KPI, módulos <code>app.py</code> / <code>analysis.py</code> / <code>dashboard_service.py</code> y cómo ejecutar el proyecto.
+                </p>
+                <span class="fw-semibold text-success">Abrir guía →</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center mt-5 small text-muted">
+        Fuentes Markdown equivalentes:
+        <a href="GUIA_BOOTSTRAP_FUNCIONAMIENTO_Y_EJEMPLOS.md">Bootstrap (.md)</a> ·
+        <a href="GUIA_ESTUDIANTES_FLASK_BOOTSTRAP_PARCIAL3.md">Estudiantes (.md)</a>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

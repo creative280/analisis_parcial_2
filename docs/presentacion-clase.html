@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Presentación · Dashboard visas Colombia · Parcial 3 IA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --slide-bg: #0b1220;
+        --slide-card: rgba(255, 255, 255, 0.06);
+        --slide-accent: #0d6efd;
+        --slide-accent-2: #198754;
+        --slide-text: #e8eef7;
+        --slide-muted: #94a3b8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: var(--slide-bg);
+        color: var(--slide-text);
+        font-family: "DM Sans", system-ui, sans-serif;
+        overflow: hidden;
+      }
+      #deck {
+        height: 100vh;
+        position: relative;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        padding: clamp(1.5rem, 4vw, 3.5rem);
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        background: radial-gradient(900px 480px at 85% -20%, rgba(13, 110, 253, 0.35), transparent 55%),
+          radial-gradient(800px 420px at 5% 110%, rgba(25, 135, 84, 0.22), transparent 50%),
+          var(--slide-bg);
+      }
+      .slide.active {
+        display: flex;
+        animation: fadeIn 0.45s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .slide-inner {
+        max-width: 56rem;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .kicker {
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--slide-muted);
+        font-weight: 600;
+      }
+      h1.display-title {
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+      }
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.88rem;
+      }
+      .glass {
+        background: var(--slide-card);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        backdrop-filter: blur(12px);
+      }
+      .team-card {
+        border-radius: 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 1rem 1.1rem;
+        height: 100%;
+      }
+      .team-card .role {
+        font-size: 0.78rem;
+        color: var(--slide-muted);
+        margin-top: 0.25rem;
+      }
+      .flow {
+        display: grid;
+        gap: 0.5rem;
+      }
+      .flow-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .nav-overlay {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1rem 1.5rem calc(1rem + env(safe-area-inset-bottom));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        background: linear-gradient(180deg, transparent, rgba(11, 18, 32, 0.92));
+        z-index: 50;
+      }
+      .nav-overlay .btn-nav {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.5rem 1.1rem;
+        font-size: 0.9rem;
+      }
+      .nav-overlay .btn-nav:hover {
+        background: rgba(13, 110, 253, 0.35);
+        border-color: rgba(13, 110, 253, 0.5);
+      }
+      .dots {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        justify-content: center;
+        flex: 1;
+      }
+      .dots button {
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 50%;
+        border: none;
+        padding: 0;
+        background: rgba(255, 255, 255, 0.25);
+        cursor: pointer;
+      }
+      .dots button.on {
+        background: var(--slide-accent);
+        transform: scale(1.2);
+      }
+      .help {
+        font-size: 0.72rem;
+        color: var(--slide-muted);
+        text-align: center;
+        user-select: none;
+      }
+      @media (max-width: 576px) {
+        .slide h1.display-title {
+          font-size: 1.65rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="deck" aria-live="polite">
+      <!-- 1 Portada -->
+      <section class="slide active" data-title="Inicio">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Inteligencia artificial · Ingeniería de software</p>
+          <h1 class="display-title display-4 mb-3">
+            Dashboard web de análisis de<br />
+            <span style="color: #7dd3fc">solicitudes de visa en Colombia</span>
+          </h1>
+          <p class="lead text-secondary mb-4" style="color: #cbd5e1 !important; font-size: 1.15rem">
+            Parcial 3 · Presentación ante el curso · Datos, visualizaciones y conclusión en una sola página Flask + Bootstrap.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="pill"><span style="color: var(--slide-accent)">●</span> Python · Pandas</span>
+            <span class="pill"><span style="color: var(--slide-accent-2)">●</span> Flask · Matplotlib</span>
+            <span class="pill">● Bootstrap 5</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2 Equipo (4 integrantes; editar nombres/roles en el HTML si hace falta) -->
+      <section class="slide" data-title="Equipo">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Quiénes presentamos</p>
+          <h2 class="h1 fw-bold mb-1">Equipo de trabajo</h2>
+          <p class="mb-4" style="color: var(--slide-muted)">Cuatro integrantes — reparto sugerido de foco en la exposición (ajustable).</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="team-card h-100">
+                <div class="fw-semibold">Ana María Camacho Castaño</div>
+                <div class="role">Datos · limpieza y consistencia del Excel</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="team-card h-100">
+                <div class="fw-semibold">Fabian Alberto Bedoya</div>
+                <div class="role">Análisis y gráficas (Pandas / Matplotlib)</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="team-card h-100">
+                <div class="fw-semibold">Maicol Smith Bueno</div>
+                <div class="role">Backend Flask · integración dashboard</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="team-card h-100">
+                <div class="fw-semibold">Jorge Iván Marín Cifuentes</div>
+                <div class="role">Interfaz Bootstrap · documentación y exposición</div>
+              </div>
+            </div>
+          </div>
+          <p class="small mt-4 mb-0" style="color: var(--slide-muted)">
+            Nota: si el equipo u roles cambian, edita los textos directamente en este archivo HTML.
+          </p>
+        </div>
+      </section>
+
+      <!-- 3 Objetivo -->
+      <section class="slide" data-title="Objetivo">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Problema</p>
+          <h2 class="h1 fw-bold mb-4">¿Qué buscamos mostrar?</h2>
+          <ul class="fs-5" style="line-height: 1.75; color: #cbd5e1">
+            <li class="mb-3">Entender patrones de <strong>solicitudes de visa</strong> registradas en el dataset institucional.</li>
+            <li class="mb-3">Pasar de un análisis en consola a un <strong>panel web</strong> compartible con el curso.</li>
+            <li class="mb-3">Cumplir el parcial: <strong>todas las gráficas</strong> + <strong>conclusión general</strong> debajo, con buena presentación.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 4 Datos -->
+      <section class="slide" data-title="Datos">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Dataset</p>
+          <h2 class="h1 fw-bold mb-3">Fuente y columnas que usamos</h2>
+          <p class="mb-3" style="color: #cbd5e1">
+            Archivo <span class="mono text-info">data/Visa_Applications_Colombia_2017_20250217.xlsx</span> cargado con Pandas.
+          </p>
+          <div class="glass p-4 mb-3">
+            <div class="mono text-white-50 mb-2">Columnas normalizadas en código (analysis.py)</div>
+            <div class="mono text-light">anio · nacionalidad · sexo · fecha_nacimiento · vocacion · numero</div>
+          </div>
+          <p class="small mb-0" style="color: var(--slide-muted)">
+            Las fechas se convierten con <span class="mono">pd.to_datetime(..., dayfirst=True)</span> para coherencia regional.
+          </p>
+        </div>
+      </section>
+
+      <!-- 5 Stack -->
+      <section class="slide" data-title="Tecnologías">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Stack</p>
+          <h2 class="h1 fw-bold mb-4">Tecnologías del proyecto</h2>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="glass p-4 h-100">
+                <h3 class="h5 text-info mb-2">Backend y datos</h3>
+                <ul class="mb-0" style="color: #cbd5e1">
+                  <li><strong>Python 3</strong></li>
+                  <li><strong>Pandas</strong> — lectura Excel y agregaciones</li>
+                  <li><strong>Matplotlib (Agg)</strong> — gráficas en el servidor sin ventana</li>
+                  <li><strong>Flask</strong> — ruta <span class="mono">/</span> y plantillas Jinja2</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="glass p-4 h-100">
+                <h3 class="h5 text-success mb-2">Frontend</h3>
+                <ul class="mb-0" style="color: #cbd5e1">
+                  <li><strong>Bootstrap 5</strong> — grid, navbar, cards, KPI</li>
+                  <li>Imágenes embebidas <span class="mono">data:image/png;base64,...</span></li>
+                  <li>CSS propio mínimo: radios, sombras, gradiente de fondo</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 Arquitectura -->
+      <section class="slide" data-title="Arquitectura">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Flujo</p>
+          <h2 class="h1 fw-bold mb-4">Cómo viaja la información</h2>
+          <div class="glass p-4">
+            <div class="flow mono" style="font-size: 0.92rem">
+              <div class="flow-row">
+                <span class="pill">Excel</span>
+                <span style="opacity: 0.5">→</span>
+                <span class="pill">pandas (cargar_datos)</span>
+                <span style="opacity: 0.5">→</span>
+                <span class="pill">dashboard_service</span>
+              </div>
+              <div class="flow-row">
+                <span class="pill">Matplotlib → PNG en memoria</span>
+                <span style="opacity: 0.5">→</span>
+                <span class="pill">Base64</span>
+                <span style="opacity: 0.5">→</span>
+                <span class="pill">Jinja (dashboard.html)</span>
+                <span style="opacity: 0.5">→</span>
+                <span class="pill text-primary">Navegador</span>
+              </div>
+            </div>
+          </div>
+          <p class="mt-3 mb-0 small" style="color: var(--slide-muted)">
+            Separación clara: <strong>src/</strong> calcula; <strong>templates/</strong> muestra; <strong>app.py</strong> conecta HTTP.
+          </p>
+        </div>
+      </section>
+
+      <!-- 7 Visualizaciones -->
+      <section class="slide" data-title="Gráficas">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Entregable</p>
+          <h2 class="h1 fw-bold mb-4">Las cuatro visualizaciones en el dashboard</h2>
+          <ol class="fs-5" style="line-height: 1.85; color: #cbd5e1">
+            <li class="mb-2"><strong>Top 5 nacionalidades</strong> — barras (conteo de solicitudes).</li>
+            <li class="mb-2"><strong>Solicitudes por año</strong> — línea temporal.</li>
+            <li class="mb-2"><strong>Distribución por sexo</strong> — gráfico circular.</li>
+            <li class="mb-2"><strong>Distribución de edades</strong> — histograma (edad estimada desde fecha de nacimiento).</li>
+          </ol>
+          <p class="small mt-3 mb-0" style="color: var(--slide-muted)">
+            Debajo: KPI (totales, periodo, edad media, año pico) y párrafo de <strong>conclusión general</strong> generado a partir de las métricas.
+          </p>
+        </div>
+      </section>
+
+      <!-- 8 Demo -->
+      <section class="slide" data-title="Demo">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Ejecución</p>
+          <h2 class="h1 fw-bold mb-4">Cómo ver el proyecto en vivo</h2>
+          <div class="glass p-4">
+            <div class="mono text-light">
+              pip install -r requirements.txt<br />
+              python app.py
+            </div>
+          </div>
+          <p class="mt-3 fs-5" style="color: #cbd5e1">
+            Navegador: <span class="mono text-info">http://127.0.0.1:5000/</span>
+          </p>
+          <p class="small mb-0" style="color: var(--slide-muted)">Opcional consola: <span class="mono">cd src</span> y <span class="mono">python analysis.py</span> para menú interactivo legado.</p>
+        </div>
+      </section>
+
+      <!-- 9 Conclusión -->
+      <section class="slide" data-title="Conclusión">
+        <div class="slide-inner">
+          <p class="kicker mb-2">Mensaje final</p>
+          <h2 class="h1 fw-bold mb-4">Qué dejamos claro con el análisis</h2>
+          <blockquote class="glass p-4 mb-0" style="border-left: 4px solid var(--slide-accent)">
+            <p class="mb-0 fs-5" style="line-height: 1.65; color: #e2e8f0">
+              Combinamos <strong>dimensión geográfica</strong> (nacionalidad), <strong>temporal</strong> (año),
+              <strong>demográfica</strong> (sexo y edad) y un texto de cierre que sintetiza cifras clave del dataset — para apoyar
+              lectura ejecutiva y discusión en grupo.
+            </p>
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- 10 Cierre -->
+      <section class="slide" data-title="Gracias">
+        <div class="slide-inner text-center">
+          <p class="kicker mb-3">Gracias</p>
+          <h2 class="display-5 fw-bold mb-3">¿Preguntas?</h2>
+          <p class="lead mb-4" style="color: #cbd5e1">
+            Documentación en carpeta <span class="mono">docs/</span>: guías HTML y Markdown disponibles para el curso.
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <a class="btn btn-primary btn-lg rounded-pill px-4" href="index.html">Índice de documentación</a>
+            <a class="btn btn-outline-light btn-lg rounded-pill px-4" href="guia-estudiantes-parcial3.html">Guía técnica del equipo</a>
+          </div>
+          <p class="small mt-4 mb-0" style="color: var(--slide-muted)">← → o flechas del teclado · Esc no cierra (uso presentación)</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="nav-overlay" role="navigation" aria-label="Navegación de diapositivas">
+      <button type="button" class="btn-nav" id="btnPrev" aria-label="Diapositiva anterior">← Anterior</button>
+      <div class="dots" id="dots"></div>
+      <div class="d-flex flex-column align-items-center gap-1">
+        <span class="help" id="counter">1 / 10</span>
+      </div>
+      <button type="button" class="btn-nav" id="btnNext" aria-label="Diapositiva siguiente">Siguiente →</button>
+    </div>
+
+    <script>
+      (function () {
+        var slides = Array.prototype.slice.call(document.querySelectorAll("#deck .slide"));
+        var idx = 0;
+        var dots = document.getElementById("dots");
+        var counter = document.getElementById("counter");
+
+        function renderDots() {
+          dots.innerHTML = "";
+          slides.forEach(function (_, i) {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.title = "Ir a diapositiva " + (i + 1);
+            b.addEventListener("click", function () {
+              go(i);
+            });
+            dots.appendChild(b);
+          });
+        }
+
+        function update() {
+          slides.forEach(function (s, i) {
+            s.classList.toggle("active", i === idx);
+          });
+          var btns = dots.querySelectorAll("button");
+          btns.forEach(function (b, i) {
+            b.classList.toggle("on", i === idx);
+          });
+          counter.textContent = idx + 1 + " / " + slides.length;
+          document.title = "Presentación (" + (idx + 1) + "/" + slides.length + ") · Parcial 3 IA";
+        }
+
+        function go(n) {
+          idx = Math.max(0, Math.min(slides.length - 1, n));
+          update();
+        }
+
+        function next() {
+          go(idx + 1);
+        }
+        function prev() {
+          go(idx - 1);
+        }
+
+        document.getElementById("btnNext").addEventListener("click", next);
+        document.getElementById("btnPrev").addEventListener("click", prev);
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+            e.preventDefault();
+            next();
+          } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+            e.preventDefault();
+            prev();
+          } else if (e.key === "Home") {
+            e.preventDefault();
+            go(0);
+          } else if (e.key === "End") {
+            e.preventDefault();
+            go(slides.length - 1);
+          }
+        });
+
+        renderDots();
+        update();
+      })();
+    </script>
+  </body>
+</html>
